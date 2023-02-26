@@ -1,0 +1,25 @@
+{
+  "name": "expresswebpage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lst68868/ExpressWebPage.git"
+  },
+  "author": "Leo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lst68868/ExpressWebPage/issues"
+  },
+  "homepage": "https://github.com/lst68868/ExpressWebPage#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
