@@ -7,27 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <button onclick="hiJulie()" id="clique"> Hi Julie </button>
-        <div id="junk"></div>
-        <button onclick="pushAway()" id="hateForLeaving">Bye Julie :(</button>
-    </div>
-    <script>
-        let responses = ["I love you", "that would hurt me", "please text me back"]
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * max);
-        }
 
-        function hiJulie(){
-            let choice = responses[getRandomInt(responses.length)];
-            const textElement = document.createTextNode(choice);
-            const button = document.getElementById("junk").appendChild(textElement);
-        }
-
-        function pushAway(addToArray){
-            responses.push(addToArray);
-        }
-//TODO: add a form for inputting text to be added to array
-    </script>
 </body>
 </html>
