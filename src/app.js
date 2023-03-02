@@ -30,11 +30,19 @@ app.get('/', function (req, res) {
   }else{
     console.log(databaseLowerCase);
   }
-  console.log(result)
+  
   //database filtered by search query
 
   //useful for putting data into a database in future
+  // function resultToHTML (thing) {
+  //   let textSpace = document.getElementById("textHere");
+  //   textSpace.innerHTML+= thing;
+  // }
+  
+  // resultToHTML(databaseLowerCase);
 })
+
+
 
 app.get('/apartment', function (req, res) {
   res.sendFile(path.join(__dirname, '/index.html'));
