@@ -5,5 +5,12 @@
   <button>Search</button>
 </form>
 <div id="textHere">
-    {{{nameFilter}}}
+    {{!-- {{{nameFilter}}} --}}
+    <ul>
+      {{#each nameFilter as |listItem|}}
+      <li>
+        {{listItem}}
+      </li>
+      {{/each}}
+    </ul>
 </div>

@@ -14,7 +14,7 @@ app.set('views', path.join(__dirname,'./views'));
 
 let names = [  "emma",  "olivia",  "ava",  "isabella",  "sophia",  "charlotte",  "mia",  "amelia",  "harper",  "evelyn",  "abigail",  "emily",  "elizabeth",  "avery",  "ella",  "scarlett",  "grace",  "chloe",  "victoria",  "aubrey"];
 
-let searchText = "";
+let searchText;
 //request and response
 //each of the "app.get" thingies is called a "route"
 app.get('/', (req, res) => {
@@ -34,12 +34,14 @@ app.get('/array', (req, res) => {
         searchText = req.query["searchText"].toLowerCase();
     }
     let nameFilter = names.filter(search => search.includes(searchText));
-    
-    res.render('array', {nameFilter});
 
+    res.render('array', {nameFilter});
 
 });
 
 //create a forEach loop that iterates over every item in nameFilter and makes it an item in a bulleted list.
+// ctrl + tilde hides and show terminal (shortcut)
+//1. render ul element
+//2. render li elements within the ul element
 
 app.listen(3000);
