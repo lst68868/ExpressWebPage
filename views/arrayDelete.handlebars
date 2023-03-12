@@ -1,4 +1,3 @@
-{{!-- "form action" is where the form will route to --}}
 <form id="form">
   <label for="searchText" id="searchText"> Enter search here </label><br>
   <input type="text" id="searchText" name="searchText"><br>
@@ -7,9 +6,9 @@
 <div id="tableHere">
     {{!-- {{{nameFilter}}} --}}
     <ul>
-      {{#each nameFilter as |listItem|}}
+      {{#each names as |name|}}
       <li>
-        {{listItem}}
+        {{name}}
       </li>
       {{/each}}
     </ul>

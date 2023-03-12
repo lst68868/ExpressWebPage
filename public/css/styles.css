@@ -1,3 +1,28 @@
 body {
     background-color: aqua;
+    font-family:Arial, Helvetica, sans-serif;
 }
+
+#navBar {
+    border-color: red;
+    text-align: center;
+    margin: 5px;
+}
+
+#tableHere ul li {
+    background-color: cornflowerblue;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+#tableHere ul {
+    text-align: center;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#form{
+    text-align:  center;
+    margin: 5px;
+}
+
