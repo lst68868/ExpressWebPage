@@ -3,6 +3,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const app = express();
 const path = require('path')
+const fs = require("fs")
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.engine('handlebars', handlebars.engine());
@@ -12,9 +13,27 @@ app.set('views', path.join(__dirname,'./views'));
 
 ///Search Button Logic///
 
-let names = [  "emma",  "olivia",  "ava",  "isabella",  "sophia",  "charlotte",  "mia",  "amelia",  "harper",  "evelyn",  "abigail",  "emily",  "elizabeth",  "avery",  "ella",  "scarlett",  "grace",  "chloe",  "victoria",  "aubrey"];
+/**
+ * 1. Here We will READ from a FILE instead of declaring an array
+ * after reading from file we 'transform' (cast) into an array, remember it will pass in as an array of bytes first. 
+ * 
+ * 
+ * 2. remember, we want to SAVE (Write to) the file everytime we edit it. Hint: Obviously this means we don't save the file during a search only query. Only delete and add 
+ * 
+ * EXTRA CREDIT: make everything it look nicer with CSS 
+ */
+// //The array I'm using as the contents of my txt file.
+// let names = [  "emma",  "olivia",  "ava",  "isabella",  "sophia",  "charlotte",  "mia",  "amelia",  "harper",  "evelyn",  "abigail",  "emily",  "elizabeth",  "avery",  "ella",  "scarlett",  "grace",  "chloe",  "victoria",  "aubrey"];
+// // The file path to my text file
+// let filePath = (`${__dirname}/array.txt`);
+// //The command that lets me write the contents of my aray, converted to a string, as my text file
+// fs.writeFileSync(filePath, names.toString());
+// //The command that lets me "read" the contents of the txt file in Terminal
+// let readFile = fs.readFileSync(filePath);
+// //The command that lets me convert the text file to a string, then an array split on commas.
+// let readFileProperArray = readFile.toString().split(",");
 
-console.log("FUCK ME DADDIE");
+// console.log(readFileProperArray);
 
 //request and response
 //each of the "app.get" thingies is called a "route"
@@ -32,11 +51,15 @@ app.get('/arraySearch', (req, res) => {
     let searchText;
     // searchText = req.query["searchText"]
     req.query["searchText"];
+    let filePath = (`${__dirname}/array.txt`);
+    let readFile = fs.readFileSync(filePath);
+    let readFileProperArray = readFile.toString().split(",");
+
     if(req.query["searchText"] !== undefined){
         
         searchText = req.query["searchText"].toLowerCase();
     }
-    let nameFilter = names.filter(search => search.includes(searchText));
+    let nameFilter = readFileProperArray.filter(search => search.includes(searchText));
 
     res.render('array', {nameFilter});
 
@@ -45,15 +68,20 @@ app.get('/arraySearch', (req, res) => {
 app.get('/arrayAdd', (req, res) => {
     // searchText = req.query["searchText"]
     let searchText;
+    let filePath = (`${__dirname}/array.txt`);
+    let readFile = fs.readFileSync(filePath);
+    let readFileProperArray = readFile.toString().split(",");
     
     req.query["searchText"];
     if(req.query["searchText"] !== undefined){
         searchText = req.query["searchText"].toLowerCase();
-        names.push(searchText);
+        readFileProperArray.push(searchText);
+        fs.writeFileSync(filePath, readFileProperArray.toString());
+
     }
-    console.log(names);
+    console.log(readFileProperArray);
     
-    res.render('arrayAdd', {names});
+    res.render('arrayAdd', {readFileProperArray});
 
 
 });
@@ -61,17 +89,23 @@ app.get('/arrayAdd', (req, res) => {
 app.get('/arrayDelete', (req, res) => {
     // searchText = req.query["searchText"]
     let searchText;
+    let filePath = (`${__dirname}/array.txt`);
+    let readFile = fs.readFileSync(filePath);
+    let readFileProperArray = readFile.toString().split(",");
+    
     
     req.query["searchText"];
-    if(req.query["searchText"] !== undefined && names.find(search => search === searchText) === searchText){
+    if(req.query["searchText"] !== undefined && readFileProperArray.find(search => search === searchText) === searchText){
         searchText = req.query["searchText"].toLowerCase();
-        let indexOfSearchText = names.indexOf(searchText);
+        let indexOfSearchText = readFileProperArray.indexOf(searchText);
         //we have the index of the search text in the array
-        names.splice(indexOfSearchText, indexOfSearchText);
+        readFileProperArray.splice(indexOfSearchText, indexOfSearchText);
+        fs.writeFileSync(filePath, readFileProperArray.toString());
+
     }
-    console.log(names);
+    console.log(readFileProperArray);
     
-    res.render('arrayDelete', {names});
+    res.render('arrayDelete', {readFileProperArray});
 
 });
 /**
