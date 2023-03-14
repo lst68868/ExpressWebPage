@@ -37,11 +37,15 @@ app.set('views', path.join(__dirname,'./views'));
 
 //request and response
 //each of the "app.get" thingies is called a "route"
+
+
 app.get('/', (req, res) => {
     let num = 5
     res.render('home', {num});
 });
 
+
+// appGet();
 
 // CRUD 
 /**
@@ -100,6 +104,7 @@ app.get('/arrayDelete', (req, res) => {
         let indexOfSearchText = readFileProperArray.indexOf(searchText);
         //we have the index of the search text in the array
         readFileProperArray.splice(indexOfSearchText, indexOfSearchText);
+
         fs.writeFileSync(filePath, readFileProperArray.toString());
 
     }
