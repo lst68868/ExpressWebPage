@@ -39,5 +39,18 @@ app.get('/arrayDelete', (req, res) => {
     res.render('arrayDelete', {readFileProperArray});
 });
 
+// here we add another router  called /upload. Start with this.
+
+
+
+/**
+ *  Here we are going to upload a new 'data' file (array.txt, very important that you UPLOAD it as the SAME NAME)
+ *      1. The new array.txt file that is uploaded should be reflected in in the table that is rendered
+ *      2. to do this, you are going to have to have an input in the HTML form, be of type "file"
+ *      3. from there, you should be able to grab it from either the req or res variable that is passed into the gets
+ *              ** you MIGHT have to use app.post, we are not there yet. Feel free to try it out if that ends up being the solution but don't beat yourself up about it **
+ *      4. assign the passed file to a global variable that is read 'aka the the read function we made on line 18'
+ *      
+ */
 
 app.listen(3000);
