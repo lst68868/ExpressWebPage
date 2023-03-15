@@ -39,7 +39,7 @@ const Delete = (req, res, readFileProperArray) => {
         searchText = req.query["searchText"].toLowerCase();
         let indexOfSearchText = readFileProperArray.indexOf(searchText);
         //we have the index of the search text in the array
-        readFileProperArray.splice(indexOfSearchText, indexOfSearchText);
+        readFileProperArray.splice(indexOfSearchText, 1);
         fs.writeFileSync(filePath, readFileProperArray.toString());
 
     }
@@ -62,9 +62,9 @@ exports.Search = Search;
 /////////////////////////////////////////////////////////
 
 const Read = (filePath) => {
-    fs.readFileSync(filePath);
-    readFileProperArray = readFile.toString().split(",");
+    let readFile = fs.readFileSync(filePath);
+    return readFileProperArray = readFile.toString().split(",");
 }
 
-// exports.Read = Read;
+exports.Read = Read;
 ///////////////////////////////////////////////////////////

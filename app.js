@@ -5,7 +5,7 @@ const app = express();
 const path = require('path')
 const fs = require("fs")
 
-const {Add, Delete, Search} = require('./Helpers/utility.js');
+const {Add, Delete, Search, Read} = require('./Helpers/utility.js');
 // const {Read} = require('./Helpers/utility.js');
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -14,8 +14,8 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname,'./views'));
 
 let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
-let readFile = fs.readFileSync(filePath);
-let readFileProperArray = readFile.toString().split(",");
+// let readFile = fs.readFileSync(filePath);
+let readFileProperArray = Read(filePath);
 
 
 app.get('/', (req, res) => {
