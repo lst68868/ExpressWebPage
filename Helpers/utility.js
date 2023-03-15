@@ -1,9 +1,9 @@
 /**
  *  you will make functions here to further 'encapsulate' your project
  *  add a function for:
- *      Add
- *      Delete
- *      Search
+ *      Add - Done 
+ *      Delete - Done
+ *      Search - Done
  *      Save
  *      Read
  */
@@ -11,22 +11,60 @@
  * Make a new branch for this work
  */
 
-const path = require('path')
-const fs = require("fs")
+const path = require('path');
+const fs = require("fs");
+let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
+let readFile = fs.readFileSync(filePath);
+let readFileProperArray = readFile.toString().split(",");
 
-
-function Add(searchText){
-    
+/////Add function works!!/////
+const Add = (req, res) => {
+    // let searchText;
+    // let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
+    // let readFile = fs.readFileSync(filePath);
+    // let readFileProperArray = readFile.toString().split(",");
+    req.query["searchText"];
+    if(req.query["searchText"] !== undefined){
+        searchText = req.query["searchText"].toLowerCase();
+        readFileProperArray.push(searchText);
+        fs.writeFileSync(filePath, readFileProperArray.toString());
+    }
 }
+exports.Add = Add;
+///////////delete function works!//////////
+const Delete = (req, res) => {
+    let searchText;
+    let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
+    let readFile = fs.readFileSync(filePath);
+    let readFileProperArray = readFile.toString().split(",");    
+    req.query["searchText"];
+    if(req.query["searchText"] !== undefined && readFileProperArray.find(search => search === searchText) === searchText){
+        searchText = req.query["searchText"].toLowerCase();
+        let indexOfSearchText = readFileProperArray.indexOf(searchText);
+        //we have the index of the search text in the array
+        readFileProperArray.splice(indexOfSearchText, indexOfSearchText);
+        fs.writeFileSync(filePath, readFileProperArray.toString());
 
-function Read(filePath){
-
+    }
 }
+exports.Delete = Delete;
+///////////////////////////////////////////////////////
 
-function Save(filePath, fileName){
+const Search = (req, res) => {
+    let searchText;
+    let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
+    let readFile = fs.readFileSync(filePath);
+    let readFileProperArray = readFile.toString().split(",");
+    // searchText = req.query["searchText"]
+    req.query["searchText"];
 
+    if(req.query["searchText"] !== undefined){
+        
+        searchText = req.query["searchText"].toLowerCase();
+    }
+    nameFilter = readFileProperArray.filter(search => search.includes(searchText));
 }
+exports.Search = Search;
+/////////////////////////////////////////////////////////
 
-function Delete(filePath, fileName){
-
-}
+///////////////////////////////////////////////////////////

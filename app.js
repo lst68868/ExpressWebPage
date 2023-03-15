@@ -5,10 +5,22 @@ const app = express();
 const path = require('path')
 const fs = require("fs")
 
+const {Add} = require('/Users/leotulchin/StudyJS/ExpressWebPage/Helpers/utility.js');
+const {Delete} = require("/Users/leotulchin/StudyJS/ExpressWebPage/Helpers/utility.js");
+const {Search} = require("/Users/leotulchin/StudyJS/ExpressWebPage/Helpers/utility.js");
+
 app.use(express.static(path.join(__dirname, 'public')))
 app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname,'./views'));
+
+let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
+let readFile = fs.readFileSync(filePath);
+let readFileProperArray = readFile.toString().split(",");
+
+
+
+
 /////////////////////////
 
 ///Search Button Logic///
@@ -37,13 +49,13 @@ app.set('views', path.join(__dirname,'./views'));
 
 //request and response
 //each of the "app.get" thingies is called a "route"
+// const Add = require('/Users/leotulchin/StudyJS/ExpressWebPage/utility.js')
 
 
 app.get('/', (req, res) => {
     let num = 5
     res.render('home', {num});
 });
-
 
 // appGet();
 
@@ -52,66 +64,19 @@ app.get('/', (req, res) => {
  * here is an R (Retrieve, search)
  */
 app.get('/arraySearch', (req, res) => {
-    let searchText;
-    // searchText = req.query["searchText"]
-    req.query["searchText"];
-    let filePath = (`${__dirname}/array.txt`);
-    let readFile = fs.readFileSync(filePath);
-    let readFileProperArray = readFile.toString().split(",");
-
-    if(req.query["searchText"] !== undefined){
-        
-        searchText = req.query["searchText"].toLowerCase();
-    }
-    let nameFilter = readFileProperArray.filter(search => search.includes(searchText));
-
+    Search(req, res);
     res.render('array', {nameFilter});
-
 });
 
 app.get('/arrayAdd', (req, res) => {
-    // searchText = req.query["searchText"]
-    let searchText;
-    let filePath = (`${__dirname}/array.txt`);
-    let readFile = fs.readFileSync(filePath);
-    let readFileProperArray = readFile.toString().split(",");
-    
-    req.query["searchText"];
-    if(req.query["searchText"] !== undefined){
-        searchText = req.query["searchText"].toLowerCase();
-        readFileProperArray.push(searchText);
-        fs.writeFileSync(filePath, readFileProperArray.toString());
-
-    }
-    console.log(readFileProperArray);
-    
+    Add(req, res);
     res.render('arrayAdd', {readFileProperArray});
-
-
 });
 
 app.get('/arrayDelete', (req, res) => {
     // searchText = req.query["searchText"]
-    let searchText;
-    let filePath = (`${__dirname}/array.txt`);
-    let readFile = fs.readFileSync(filePath);
-    let readFileProperArray = readFile.toString().split(",");
-    
-    
-    req.query["searchText"];
-    if(req.query["searchText"] !== undefined && readFileProperArray.find(search => search === searchText) === searchText){
-        searchText = req.query["searchText"].toLowerCase();
-        let indexOfSearchText = readFileProperArray.indexOf(searchText);
-        //we have the index of the search text in the array
-        readFileProperArray.splice(indexOfSearchText, indexOfSearchText);
-
-        fs.writeFileSync(filePath, readFileProperArray.toString());
-
-    }
-    console.log(readFileProperArray);
-    
+    Delete(req, res);
     res.render('arrayDelete', {readFileProperArray});
-
 });
 /**
  * make a router that adds to the names array with an html form, and displays the entire array in a table, like before
