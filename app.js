@@ -19,6 +19,8 @@ app.set('views', path.join(__dirname,'./views'));
 let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
 // let readFile = fs.readFileSync(filePath);
 let readFileProperArray = Read(filePath);
+let uploadedFileData;
+console.log(uploadedFileData) //this should read as undefined every time the server restarts
 
 app.get('/', (req, res) => {
     let num = 5
@@ -51,7 +53,7 @@ app.get('/arrayUpload', (req, res) => {
 
 app.post("/arrayUpload", (req, res) => {
     let uploadedFileData = req.files.file.data.toString().split(",")
-    console.log(uploadedFileData);
+    this.uploadedFileData = uploadedFileData; //this allows you to access the global version of a variable within a local scope
 });
 
 
