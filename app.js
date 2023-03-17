@@ -20,7 +20,6 @@ let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
 // let readFile = fs.readFileSync(filePath);
 let readFileProperArray = Read(filePath);
 
-
 app.get('/', (req, res) => {
     let num = 5
     res.render('home', {num});
@@ -46,18 +45,15 @@ app.get('/arrayDelete', (req, res) => {
 app.get('/arrayUpload', (req, res) => {
     // searchText = req.query["searchText"]
     let filePath = "/Users/leotulchin/StudyJS/ExpressWebPage/views/arrayUpload.handlebars"
-    res.render(filePath) //PROBLEM
-    // res.render('arrayUpload', {readFileProperArray}); // DEAD CODE
+    res.render(filePath)
     console.log("arrayUpload complete")
 });
 
 app.post("/arrayUpload", (req, res) => {
-    if(req.files) {
-        console.log(req.files);
-    }else{
-        console.log("reeEEEEeeeEEeee");
-    }
+    let uploadedFileData = req.files.file.data.toString().split(",")
+    console.log(uploadedFileData);
 });
+
 
 
 // here we add another router  called /upload. Start with this.
