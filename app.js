@@ -48,12 +48,12 @@ app.get('/arrayUpload', (req, res) => {
     // searchText = req.query["searchText"]
     let filePath = "/Users/leotulchin/StudyJS/ExpressWebPage/views/arrayUpload.handlebars"
     res.render(filePath)
-    console.log("arrayUpload complete")
 });
 
 app.post("/arrayUpload", (req, res) => {
     let uploadedFileData = req.files.file.data.toString().split(",")
     this.uploadedFileData = uploadedFileData; //this allows you to access the global version of a variable within a local scope
+    res.render('arrayUpload', {uploadedFileData});
 });
 
 
