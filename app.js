@@ -4,6 +4,9 @@ const handlebars = require('express-handlebars');
 const app = express();
 const path = require('path')
 const fs = require("fs")
+const fileUpload = require("express-fileupload")
+
+app.use(fileUpload());
 
 const {Add, Delete, Search, Read} = require('./Helpers/utility.js');
 // const {Read} = require('./Helpers/utility.js');
@@ -31,6 +34,7 @@ app.get('/arraySearch', (req, res) => {
 app.get('/arrayAdd', (req, res) => {
     Add(req, res, readFileProperArray);
     res.render('arrayAdd', {readFileProperArray});
+    console.log("arrayAdd complete")
 });
 
 app.get('/arrayDelete', (req, res) => {
@@ -38,6 +42,23 @@ app.get('/arrayDelete', (req, res) => {
     Delete(req, res, readFileProperArray);
     res.render('arrayDelete', {readFileProperArray});
 });
+
+app.get('/arrayUpload', (req, res) => {
+    // searchText = req.query["searchText"]
+    let filePath = "/Users/leotulchin/StudyJS/ExpressWebPage/views/arrayUpload.handlebars"
+    res.render(filePath) //PROBLEM
+    // res.render('arrayUpload', {readFileProperArray}); // DEAD CODE
+    console.log("arrayUpload complete")
+});
+
+app.post("/arrayUpload", (req, res) => {
+    if(req.files) {
+        console.log(req.files);
+    }else{
+        console.log("reeEEEEeeeEEeee");
+    }
+});
+
 
 // here we add another router  called /upload. Start with this.
 
