@@ -8,7 +8,7 @@ const fileUpload = require("express-fileupload")
 
 app.use(fileUpload());
 
-const {Add, Delete, Search, Read} = require('./Helpers/utility.js');
+const {Add, Delete, Search, Read, Json} = require('./Helpers/utility.js');
 // const {Read} = require('./Helpers/utility.js');
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -17,9 +17,12 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname,'./views'));
 
 let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
+let filePath2 = ("/Users/leotulchin/StudyJS/ExpressWebPage/sample.json");
+let jsonNames = [];
 // let readFile = fs.readFileSync(filePath);
 let readFileProperArray = Read(filePath);
 let uploadedFileData;
+let uploadedJSONData;
 console.log(uploadedFileData) //this should read as undefined every time the server restarts
 
 app.get('/', (req, res) => {
@@ -56,7 +59,19 @@ app.post("/arrayUpload", (req, res) => {
     res.render('arrayUpload', {uploadedFileData});
 });
 
+app.get('/jsonUpload', (req, res) => {
+    // searchText = req.query["searchText"]
+    let filePath2 = "/Users/leotulchin/StudyJS/ExpressWebPage/views/jsonUpload.handlebars"
+    res.render(filePath2)
+});
 
+app.post("/jsonUpload", (req, res) => {
+    Json(req, res);
+    // let uploadedJSONData = req.files;
+    // console.log(uploadedJSONData);
+    // this.uploadedJSONData = uploadedJSONData; //this allows you to access the global version of a variable within a local scope
+    // res.render('arrayUpload', {uploadedJSONData});
+});
 
 // here we add another router  called /upload. Start with this.
 

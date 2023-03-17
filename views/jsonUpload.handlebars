@@ -1,0 +1,16 @@
+<h1>JSON Upload in Node.js App</h1>
+<form action="/jsonUpload" enctype="multipart/form-data" method="POST">
+    <label for="file">JSON File:</label>
+    <input type="file" name="file"/> <br /><br />
+    <input type="submit" value="Upload" />
+</form>
+<div id="tableHere">
+    {{!-- {{{nameFilter}}} --}}
+    <ul>
+      {{#each jsonNames as |name|}}
+      <li>
+        {{name}}
+      </li>
+      {{/each}}
+    </ul>
+</div>

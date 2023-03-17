@@ -14,6 +14,7 @@
 const path = require('path');
 const fs = require("fs");
 let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
+let filePath2 = ("/Users/leotulchin/StudyJS/ExpressWebPage/sample.json");
 // let readFile = fs.readFileSync(filePath);
 // let readFileProperArray = readFile.toString().split(",");
 
@@ -67,4 +68,15 @@ const Read = (filePath) => {
 }
 
 exports.Read = Read;
+
+const Json = (req, res) => {
+    let jsonNames = [];
+    let jsonFile = JSON.parse(req.files.file.data);
+    for(i = 1; i<jsonFile.length; i++){
+        jsonNames.push(jsonFile[i].name);
+    }
+    console.log(jsonNames);
+}
+
+exports.Json = Json;
 ///////////////////////////////////////////////////////////
