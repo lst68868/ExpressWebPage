@@ -69,13 +69,11 @@ const Read = (filePath) => {
 
 exports.Read = Read;
 
-const Json = (req, res) => {
-    let jsonNames = [];
+const Json = (req, res, jsonNames) => {
     let jsonFile = JSON.parse(req.files.file.data);
     for(i = 1; i<jsonFile.length; i++){
         jsonNames.push(jsonFile[i].name);
     }
-    console.log(jsonNames);
 }
 
 exports.Json = Json;

@@ -66,7 +66,9 @@ app.get('/jsonUpload', (req, res) => {
 });
 
 app.post("/jsonUpload", (req, res) => {
-    Json(req, res);
+    Json(req, res, jsonNames);
+    this.jsonNames = jsonNames;
+    res.render('jsonUpload', {jsonNames});
     // let uploadedJSONData = req.files;
     // console.log(uploadedJSONData);
     // this.uploadedJSONData = uploadedJSONData; //this allows you to access the global version of a variable within a local scope
