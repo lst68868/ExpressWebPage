@@ -17,12 +17,10 @@ app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname,'./views'));
 
 let filePath = ("/Users/leotulchin/StudyJS/ExpressWebPage/array.txt");
-let filePath2 = ("/Users/leotulchin/StudyJS/ExpressWebPage/sample.json");
 let jsonNames = [];
 // let readFile = fs.readFileSync(filePath);
 let readFileProperArray = Read(filePath);
 let uploadedFileData;
-let uploadedJSONData;
 console.log(uploadedFileData) //this should read as undefined every time the server restarts
 
 app.get('/', (req, res) => {
@@ -50,7 +48,7 @@ app.get('/arrayDelete', (req, res) => {
 app.get('/arrayUpload', (req, res) => {
     // searchText = req.query["searchText"]
     let filePath = "/Users/leotulchin/StudyJS/ExpressWebPage/views/arrayUpload.handlebars"
-    res.render(filePath)
+    res.render('arrayUpload')
 });
 
 app.post("/arrayUpload", (req, res) => {

@@ -72,7 +72,7 @@ exports.Read = Read;
 const Json = (req, res, jsonNames) => {
     let jsonFile = JSON.parse(req.files.file.data);
     for(i = 1; i<jsonFile.length; i++){
-        jsonNames.push(jsonFile[i].name);
+        jsonNames.push(jsonFile[i]);
     }
 }
 
